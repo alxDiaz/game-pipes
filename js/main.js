@@ -2,9 +2,10 @@ function Game(options){
   this.rows = options.rows;
   this.columns = options.columns;
   this.tap = undefined;
+  this.pipes = [];
 
 
-  //array that creates the grid where the snake can move.
+  //array that creates the grid of the game.
   for(var rowIndex= 0; rowIndex < this.rows; rowIndex++){
       for(var columnsIndex = 0; columnsIndex < this.columns ; columnsIndex++){
         $('.container').append($('<div>')
@@ -17,6 +18,17 @@ function Game(options){
 //  $('.container').toggle();
 }
 
+//Method that inserts a new Pipe in the array of pipes on the board
+Game.prototype.insertPipe = function (row, col, type){
+ this.pipes.push({
+    row: row,
+    col: col,
+    type: type
+   }
+ );
+};
+
+//Method that creates the initial Tap of the game in a random position
 Game.prototype.setTap = function(){
   this.tap = {
     row: Math.floor(Math.random() * this.rows),
@@ -24,6 +36,7 @@ Game.prototype.setTap = function(){
   };
 };
 
+//Method that draws on board the previusly created Tap.
 Game.prototype.drawTap = function(){
   var selector = '[data-row=' + this.tap.row + '][data-column=' + this.tap.column + ']';
   $(selector).addClass('initialTap');
@@ -35,9 +48,14 @@ $(document).ready(function(){
     rows: 10,
     columns: 7,
   });
-  console.log("Se esta cargando");
   game.setTap();
-  console.log(game.tap);
   game.drawTap();
+
+  //Event Listener to catch de click of the User in the cell
+    $(".cell").click(function(){
+      var rowCell = $(this).attr("data-row");
+      var colCell = $(this).attr("data-column");
+      console.log(rowCell + "," + colCell);
+    });
 
 });
