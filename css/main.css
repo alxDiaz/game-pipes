@@ -1,14 +1,14 @@
 .container {
   height: 500px;
   margin: 30px auto;
-  width: 350px;
+  width: 400px;
 }
 
 .background{
   /*background : url("../img/backgroundImage.jpg") no-repeat;*/
-  background-size: 100%;
-  width: 100%;
-  height: 100vh;
+  /*background-size: 100%;
+  width: 100px;
+  height: 100px;*/
 }
 
 .cell {
@@ -34,10 +34,26 @@
 
 .initialTap{
   background-color: green;
-
 }
 
 img{
   width: 100%;
 	height:100%;
+}
+
+.newPipe{
+  background-size: contain;
+  border: 1px solid black;
+  box-sizing: border-box;
+  float: left;
+  height: 100px;
+  width: 100px;
+}
+
+.container2 {
+  height: 100px;
+  margin: 30px auto;
+  width: 100px;
+  /*background-color: red;*/
+
 }
