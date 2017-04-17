@@ -6,8 +6,13 @@ function Game(options){
   this._typeOfPipes = 13; //number of types pipes
   this._actualPipe = undefined; //Pipe that player will play with
   this.Pipes = [
-      { type: "1",         img: "pipe.png" },
-      { type: "2",          img: "pipe2.png" }
+      { type: "1",        img: "pipe1.png" },
+      { type: "2",        img: "pipe2.png" },
+      { type: "3",        img: "pipe3.png" },
+      { type: "4",        img: "pipe4.png" },
+      { type: "13",       img: "pipe13.png" },
+      { type: "14",       img: "pipe14.png" },
+      { type: "15",       img: "pipe15.png" },
     ];
 
   //array that creates the grid of the game.
@@ -36,6 +41,7 @@ Game.prototype.insertPipe = function (row, col, type){
 Game.prototype.createNewPipe = function(){
   var indexPipe = Math.floor(Math.random() * this.Pipes.length);
   this._actualPipe = this.Pipes[indexPipe];
+  this.drawPipe();
 };
 
 //Draw the new Pipe
@@ -47,6 +53,23 @@ Game.prototype.drawPipe = function(){
 };
 
 //set new Pipe on the grid
+Game.prototype.setNewPipe = function (row, col) {
+  var false1 = (this.tap.row !== parseInt(row));
+  var false2 =(this.tap.column !== parseInt(col));
+  var falseV = ((this.tap.row !== row) && (this.tap.column !== col)) ;
+  console.log(this.tap.row+ ","+this.tap.column + "original");
+  console.log(row +","+col);
+  console.log(falseV);
+
+
+  if(!(this.tap.row == parseInt(row) && this.tap.column == parseInt(col))){
+    var selector = '[data-row=' + row + '][data-column=' + col + ']';
+    var imagePath = "<img src='img/" + this._actualPipe.img + "'>";
+    console.log(selector +"," +imagePath);
+    $(selector).html(imagePath);
+    this.createNewPipe();
+  }
+};
 
 //Method that creates the initial Tap of the game in a random position
 Game.prototype.setTap = function(){
@@ -59,6 +82,7 @@ Game.prototype.setTap = function(){
 //Method that draws on board the previusly created Tap.
 Game.prototype.drawTap = function(){
   var selector = '[data-row=' + this.tap.row + '][data-column=' + this.tap.column + ']';
+  console.log("row=" + this.tap.row +" , col= "  + this.tap.column+ "");
   $(selector).addClass('initialTap');
   $(selector).html("<img src='img/water_tap.png'>");
 };
@@ -78,6 +102,7 @@ $(document).ready(function(){
       var rowCell = $(this).attr("data-row");
       var colCell = $(this).attr("data-column");
       console.log(rowCell + "," + colCell);
+      game.setNewPipe(rowCell,colCell);
     });
 
 });
