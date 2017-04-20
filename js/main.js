@@ -151,16 +151,37 @@ Game.prototype.setTap = function(){
   var colTap = Math.floor(Math.random() * this.columns);
   var dirTap = Math.floor((Math.random() * 4) + 1);
   if(rowTap === 0){
-    while(dirTap === 3){
-      dirTap = Math.floor((Math.random() * 4) + 1);
+    if(colTap ===0){
+      while(dirTap === 3 || dirTap===4){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
+    }
+    else if(colTap === this.columns - 1){
+      while(dirTap === 3 || dirTap===2){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
+    }else if(dirTap===3){
+      while(dirTap === 3){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
     }
   }
   else if(rowTap === this.rows - 1){
-    while(dirTap === 1){
-      dirTap = Math.floor((Math.random() * 4) + 1);
+    if(colTap===0){
+      while(dirTap === 1 || dirTap===4){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
     }
-  }
-  if(colTap === 0){
+    else if(colTap === this.columns - 1){
+      while(dirTap === 1 || dirTap===2){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
+    }else if(dirTap===1){
+      while(dirTap === 1){
+        dirTap = Math.floor((Math.random() * 4) + 1);
+      }
+    }
+  }else if(colTap === 0){
     while(dirTap === 4){
       dirTap = Math.floor((Math.random() * 4) + 1);
     }
@@ -355,6 +376,8 @@ Game.prototype.fillWater = function(direction, row, col){
 };
 
 $(document).ready(function(){
+//  var audio = new Audio('audio/marioBros.mp3');
+  //audio.play();
   var game = new Game({
     rows: 10,
     columns: 7,
@@ -366,6 +389,13 @@ $(document).ready(function(){
   game.setTimer(30000);
 
 
+
+/*
+  var audio1 = new Audio('audio/water.mp3');
+  audio1.loop = true;
+  audio1.play();
+*/
+
   //Event Listener to catch de click of the User in the cell
     $(".cell").click(function(){
       var rowCell = $(this).attr("data-row");
@@ -373,6 +403,8 @@ $(document).ready(function(){
       console.log(rowCell + "," + colCell);
       if(_timeOff === false){
         game.setNewPipe(rowCell,colCell);
+        var audioPipe = new Audio('audio/pipeSound.mp3');
+        audioPipe.play();
       }
     });
 
