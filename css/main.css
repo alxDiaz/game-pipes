@@ -8,7 +8,7 @@
 
 .container0{
   margin: 30px auto;
-  
+
 }
 
 .center { margin: 0px auto;
@@ -27,12 +27,6 @@ header{
      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
      -webkit-text-stroke-width: 1px;
      -webkit-text-stroke-color: black;
-}
-
-body{
-  /*background : url("../img/header.jpg");*/
-
-
 }
 
 .background{
@@ -94,25 +88,18 @@ img{
 }
 */
 .newPipe{
-
-
-  margin: 0px auto;
+    margin: 0px auto;
     height: 150px;
     width: 150px;
     text-align: center;
     background-color: white;
     border: 1px solid black;
-
-
-
-
 }
 
 .container2 {
   height: 500px;
   margin: 30px auto;
   width: 300px;
-
 
   /*background-color: red;*/
 

@@ -47,12 +47,8 @@ function Game(options){
 
 Game.prototype.timeRunning = function(){
   var timeNow = new Date().getTime();
-  var timeChange = 30 - (Math.round((3000 - (timeStarts - timeNow)) / 1000));
+  var timeChange = 33 - (Math.round((3000 - (timeStarts - timeNow)) / 1000));
   $('#msg').text("Time Left: " + timeChange);
-
-  if(timeChange<=0){
-
-  }
 
 };
 
@@ -81,7 +77,7 @@ Game.prototype.setTimer = function (time){
     }
     that.fillWater(tapdir, taprow, tapcol);// depends in the kind of tap
     _timeOff = true;
-    //clearInterval(myVarTime);
+    clearInterval(myVarTime);
     console.log("puntos ganados al momento",that.pointsEarned);
     that.paintLeaks();
     //-------------------------------------------------------------
@@ -427,7 +423,7 @@ $(document).ready(function(){
   game.createNewPipe();
   game.drawPipe();
   timeStarts = new Date().getTime();
-  //myVarTime = setInterval(game.timeRunning(), 1000);
+  myVarTime = setInterval(game.timeRunning, 1000);
   game.setTimer(30000);
 
 
