@@ -1,14 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
 .container {
   height: 500px;
   margin: 30px auto;
   width: 400px;
 }
 
+header{
+  font-family: 'Orbitron', sans-serif;
+  color: black;
+     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+     -webkit-text-stroke-width: 1px;
+     -webkit-text-stroke-color: black;
+}
+
+body{
+  /*background : url("../img/header.jpg");*/
+
+
+}
+
 .background{
-  /*background : url("../img/backgroundImage.jpg") no-repeat;*/
-  /*background-size: 100%;
-  width: 100px;
-  height: 100px;*/
+  background : url("../img/backgroundImage.jpg") no-repeat;
+  background-size: 100%;
+
 }
 
 .cell {
@@ -18,6 +33,10 @@
   float: left;
   height: 50px;
   width: 50px;
+}
+
+.cell:hover{
+  transform: scale(1.1,1.1);
 }
 
 .board {
@@ -33,21 +52,37 @@
   /*background : url("../img/water_tap.png") no-repeat;*/
 
 .initialTap{
-  background-color: green;
+  background-color: #77d8ff;
 }
 
 img{
   width: 100%;
 	height:100%;
 }
+/*
+.container0 {
+  height: 100px;
+  margin: 30px auto;
+  /*background-color: red;
+}
 
+.counter{
+  background-size: contain;
+  background-color: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 150px;
+  width: 150px;
+}
+*/
 .newPipe{
   background-size: contain;
+  background-color: white;
   border: 1px solid black;
   box-sizing: border-box;
   float: left;
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
 }
 
 .container2 {
