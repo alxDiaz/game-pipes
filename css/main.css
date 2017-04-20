@@ -6,6 +6,21 @@
   width: 400px;
 }
 
+.container0{
+  margin: 30px auto;
+  
+}
+
+.center { margin: 0px auto;
+  height: 150px;
+  width: 150px;
+  text-align: center;
+  background-color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-size: larger;
+  border: 1px solid black;
+}
+
 header{
   font-family: 'Orbitron', sans-serif;
   color: black;
@@ -23,6 +38,8 @@ body{
 .background{
   background : url("../img/backgroundImage.jpg") no-repeat;
   background-size: 100%;
+  max-width: 1800px;
+  width: 100%;
 
 }
 
@@ -33,6 +50,7 @@ body{
   float: left;
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
 
 .cell:hover{
@@ -76,19 +94,26 @@ img{
 }
 */
 .newPipe{
-  background-size: contain;
-  background-color: white;
-  border: 1px solid black;
-  box-sizing: border-box;
-  float: left;
-  height: 150px;
-  width: 150px;
+
+
+  margin: 0px auto;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+
+
+
+
 }
 
 .container2 {
-  height: 100px;
+  height: 500px;
   margin: 30px auto;
-  width: 100px;
+  width: 300px;
+
+
   /*background-color: red;*/
 
 }

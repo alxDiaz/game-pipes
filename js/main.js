@@ -1,11 +1,15 @@
 var _timeOff = false;
-var interTime = 300;
+var interTime = 200;
+var lostGame = false;
+var timeStarts;
+var myVarTime;
 function Game(options){
   this.rows = options.rows;
   this.pointsEarned = 0;
   this.columns = options.columns;
   this.tap = undefined;
   this.pipesPlaced = [];
+  this.leakPoints = 0;
   this.pipesChecked = [];
   this.wrongPipes = [];
   this._typeOfPipes = 13; //number of types pipes
@@ -41,6 +45,17 @@ function Game(options){
 //  $('.container').toggle();
 }
 
+Game.prototype.timeRunning = function(){
+  var timeNow = new Date().getTime();
+  var timeChange = 30 - (Math.round((3000 - (timeStarts - timeNow)) / 1000));
+  $('#msg').text("Time Left: " + timeChange);
+
+  if(timeChange<=0){
+
+  }
+
+};
+
 //Method that sets the time to play
 Game.prototype.setTimer = function (time){
   var that = this;
@@ -66,9 +81,21 @@ Game.prototype.setTimer = function (time){
     }
     that.fillWater(tapdir, taprow, tapcol);// depends in the kind of tap
     _timeOff = true;
+    //clearInterval(myVarTime);
     console.log("puntos ganados al momento",that.pointsEarned);
-  }, time);
+    that.paintLeaks();
+    //-------------------------------------------------------------
+    var msg = "";
+    if(lostGame===true){
+      msg="You lose. You had " + that.leakPoints + " leak points.";
+    }
+    else {
+      msg= "You won!! You made "+ that.pointsEarned + " points" ;
+    }
 
+    $('#msg').text(msg);
+  //  $('.counter').toggleClass('center');
+  }, time);
 };
 
 //Method that inserts a new Pipe in the array of pipes on the board
@@ -216,12 +243,25 @@ Game.prototype.colorWaterCell = function(direction,row, col){
     var selector = '[data-row=' + row + '][data-column=' + col + ']';
     $(selector).css("background-color","#77d8ff");
   }, interTime);
-  interTime+= 300;
+  interTime+= 100;
+};
+
+Game.prototype.paintLeaks = function(){
+  this.wrongPipes.forEach(function(pipe){
+    var selector = '[data-row=' + pipe.row + '][data-column=' + pipe.col + ']';
+    $(selector).css("border-color", "#f7473d");
+  });
 };
 
 Game.prototype.errorCell = function (row,col) {
-  var selector = '[data-row=' + row + '][data-column=' + col + ']';
-  $(selector).css("border-color", "#f7473d");
+  lostGame = true;
+  this.leakPoints++;
+  this.wrongPipes.push({
+        row: row,
+        col: col,
+      });
+  //var selector = '[data-row=' + row + '][data-column=' + col + ']';
+//  $(selector).css("border-color", "#f7473d");
 };
 
 //Method that save the visited pipes in an array
@@ -386,15 +426,10 @@ $(document).ready(function(){
   game.drawTap();
   game.createNewPipe();
   game.drawPipe();
+  timeStarts = new Date().getTime();
+  //myVarTime = setInterval(game.timeRunning(), 1000);
   game.setTimer(30000);
 
-
-
-/*
-  var audio1 = new Audio('audio/water.mp3');
-  audio1.loop = true;
-  audio1.play();
-*/
 
   //Event Listener to catch de click of the User in the cell
     $(".cell").click(function(){
