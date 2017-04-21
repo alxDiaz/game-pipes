@@ -312,11 +312,9 @@ Game.prototype.fillWater = function(direction, row, col){
   var indexPipesPlaced ;
   if(row >9 || col > 6 || row < 0 || col < 0){ //Check if the call for the metod is out of boundaries (CHeck if its necesary)
     return;
-  }
+    }
 
   this.colorWaterCell(direction,row, col);
-
-
 
   //Check that the cell given exist in the array of pipes placed.
   this.pipesPlaced.forEach(function (pipe,index){
@@ -347,8 +345,6 @@ Game.prototype.fillWater = function(direction, row, col){
   this.alreadyCheck(row, col, type);
   this.sumPoints(type);
 
-
-  // pon color a la celda con barrido segun direccion.
   if(direction === 2){//Conditions when water comes from the left.
     if(type === 2 || type === 3 || type === 8 || type === 9 || type === 10 || type === 12 || type === 14){
       console.log("You lose");
@@ -412,8 +408,6 @@ Game.prototype.fillWater = function(direction, row, col){
 };
 
 $(document).ready(function(){
-//  var audio = new Audio('audio/marioBros.mp3');
-  //audio.play();
   var game = new Game({
     rows: 10,
     columns: 7,
